@@ -15,7 +15,6 @@ import com.sky.mapper.SetmealDishMapper;
 import com.sky.result.PageResult;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
-import org.aspectj.bridge.Message;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -132,6 +131,7 @@ public class DishServiceImpl implements DishService {
      * 修改菜品
      * @param dishDTO
      */
+    @Transactional
     public void updateWithFlavor(DishDTO dishDTO) {
         Dish dish = new Dish();
         BeanUtils.copyProperties(dishDTO,dish);
@@ -152,5 +152,29 @@ public class DishServiceImpl implements DishService {
             dishFlavorMapper.insertBath(flavors);
         }
 
+    }
+
+    /**
+     * 根据分类id查询菜品
+     * @param categoryId
+     * @return
+     */
+    public List<Dish> list(Long categoryId) {
+        Dish dish = new Dish();
+        dish.setCategoryId(categoryId);
+        dish.setStatus(StatusConstant.ENABLE);
+        return dishMapper.list(dish);
+    }
+
+    /**
+     * 菜品起售停售
+     * @param status
+     * @param id
+     */
+    public void startOrStop(Integer status, Long id) {
+        Dish dish = new Dish();
+        dish.setStatus(status);
+        dish.setId(id);
+        dishMapper.update(dish);
     }
 }

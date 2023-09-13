@@ -31,6 +31,7 @@
         <jaxb-api>2.3.1</jaxb-api>
         <poi>3.16</poi>
         <redis>2.5.3</redis>
+        <cache>2.7.3</cache>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -50,6 +51,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${redis}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-cache</artifactId>
+                <version>${cache}</version>
             </dependency>
 
             <dependency>

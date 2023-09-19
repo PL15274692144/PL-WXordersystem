@@ -72,7 +72,7 @@
                 and order_time &gt; #{begin}
             </if>
             <if test="end != null">
-                and order_time &gt; #{end}
+                and order_time &lt; #{end}
             </if>
             <if test="status != null">
                 and status = #{status}

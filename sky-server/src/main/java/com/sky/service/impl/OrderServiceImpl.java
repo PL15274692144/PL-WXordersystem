@@ -102,6 +102,9 @@ public class OrderServiceImpl implements OrderService {
             orders.setPhone(addressBook.getPhone());
             orders.setConsignee(addressBook.getConsignee());
             orders.setUserId(userId);
+            if(orders.getTablewareStatus() == 0 && orders.getTablewareNumber() == 0){
+                orders.setTablewareNumber(1);
+            }
 
             orderMapper.insert(orders);
 
@@ -159,7 +162,7 @@ public class OrderServiceImpl implements OrderService {
      *
      * @param outTradeNo
      */
-    public void paySuccess(String outTradeNo) {
+    public Long paySuccess(String outTradeNo) {
 
         // 根据订单号查询订单
         Orders ordersDB = orderMapper.getByNumber(outTradeNo);
@@ -185,6 +188,8 @@ public class OrderServiceImpl implements OrderService {
 
         String json = JSON.toJSONString(map);
         webSocketServer.sendToAllClient(json);
+
+        return orders.getId();
     }
 
     /**
@@ -232,7 +237,7 @@ public class OrderServiceImpl implements OrderService {
      */
     public OrderVO details(Long id) {
         //根据id查询订单
-        Orders orders = orderDetailMapper.getById(id);
+        Orders orders = orderMapper.getById(id);
 
         //查询该订单对应的菜品/套餐明细
         List<OrderDetail> orderDetailList = orderDetailMapper.getByOrderId(orders.getId());

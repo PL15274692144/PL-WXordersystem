@@ -61,3 +61,7 @@ sky:
     we-chat-pay-cert-file-path: ${sky.wechat.we-chat-pay-cert-file-path}
     notify-url: ${sky.wechat.notify-url}
     refund-notify-url: ${sky.wechat.refund-notify-url}
+  shop:
+    address: 广东省东莞市生命金融城
+  baidu:
+    ak: EL1LzUABsnn3WUmn7K8j37H7L7UIGv66

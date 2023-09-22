@@ -32,7 +32,7 @@ public interface UserMapper {
     User getById(Long userId);
 
     /**
-     * 根据map查询用户数量
+     * 根据指定的时间和状态查询用户
      * @param map
      * @return
      */
